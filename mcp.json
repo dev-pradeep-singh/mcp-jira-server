@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "jira": {
+      "command": "C:\\workspace\\ai\\mcp-jira-server\\.venv\\Scripts\\mcp-jira-server.exe",
+      "args": [],
+      "env": {
+        "JIRA_URL": "https://luxproject.luxoft.com/jira",
+        "JIRA_API_TOKEN": "${JIRA_API_TOKEN}"
+      }
+    }
+  }
+}

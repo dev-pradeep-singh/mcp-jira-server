@@ -14,8 +14,8 @@ class ConfigError(RuntimeError):
 @dataclass(frozen=True)
 class JiraConfig:
     url: str
-    email: str
     api_token: str
+    email: str = ""
 
     @classmethod
     def from_env(cls) -> "JiraConfig":
@@ -27,7 +27,6 @@ class JiraConfig:
             name
             for name, value in (
                 ("JIRA_URL", url),
-                ("JIRA_EMAIL", email),
                 ("JIRA_API_TOKEN", api_token),
             )
             if not value
