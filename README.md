@@ -38,10 +38,12 @@ An [MCP](https://modelcontextprotocol.io) server that gives AI assistants (Claud
    cp .env.example .env
    ```
 
-   ```
-   JIRA_URL=https://your-domain.atlassian.net
+  ```
+  JIRA_URL=https://your-domain.atlassian.net/jira
   JIRA_PAT_TOKEN=your-pat-token
-   ```
+  ```
+
+  Note: for this server setup, include `/jira` at the end of `JIRA_URL`.
 
 4. Run the server directly to sanity-check it starts:
 
@@ -68,7 +70,7 @@ cp .mcp.json.example .mcp.json
       "command": "/absolute/path/to/mcp-jira-server/.venv/bin/mcp-jira-server",
       "args": [],
       "env": {
-        "JIRA_URL": "https://your-domain.atlassian.net",
+        "JIRA_URL": "https://your-domain.atlassian.net/jira",
         "JIRA_PAT_TOKEN": "your-pat-token"
       }
     }
@@ -85,7 +87,7 @@ Alternatively, register it via the CLI instead of hand-editing the file:
 
 ```bash
 claude mcp add jira \
-  -e JIRA_URL=https://your-domain.atlassian.net \
+  -e JIRA_URL=https://your-domain.atlassian.net/jira \
   -e JIRA_PAT_TOKEN=your-pat-token \
   -- /absolute/path/to/mcp-jira-server/.venv/bin/mcp-jira-server
 ```

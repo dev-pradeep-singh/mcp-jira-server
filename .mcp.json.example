@@ -4,7 +4,7 @@
       "command": "/absolute/path/to/mcp-jira-server/.venv/bin/mcp-jira-server",
       "args": [],
       "env": {
-        "JIRA_URL": "https://your-domain.atlassian.net",
+        "JIRA_URL": "https://your-domain.atlassian.net/jira",
         "JIRA_PAT_TOKEN": "your-pat-token"
       }
     }
