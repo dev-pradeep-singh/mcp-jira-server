@@ -1,12 +1,11 @@
 {
-  "mcpServers": {
+  "servers": {
     "jira": {
       "command": "/absolute/path/to/mcp-jira-server/.venv/bin/mcp-jira-server",
       "args": [],
       "env": {
         "JIRA_URL": "https://your-domain.atlassian.net",
-        "JIRA_EMAIL": "you@example.com",
-        "JIRA_API_TOKEN": "your-api-token"
+        "JIRA_PAT_TOKEN": "your-pat-token"
       }
     }
   }

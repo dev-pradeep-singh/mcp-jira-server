@@ -5,7 +5,7 @@
       "args": [],
       "env": {
         "JIRA_URL": "https://luxproject.luxoft.com/jira",
-        "JIRA_API_TOKEN": "${JIRA_API_TOKEN}"
+        "JIRA_PAT_TOKEN": "${JIRA_PAT_TOKEN}"
       }
     }
   }

@@ -30,7 +30,7 @@ An [MCP](https://modelcontextprotocol.io) server that gives AI assistants (Claud
    pip install -e .
    ```
 
-2. Create a Jira API token at https://id.atlassian.com/manage-profile/security/api-tokens.
+2. Create a Jira Personal Access Token (PAT) in your Jira instance.
 
 3. Copy `.env.example` to `.env` and fill in your credentials:
 
@@ -40,8 +40,7 @@ An [MCP](https://modelcontextprotocol.io) server that gives AI assistants (Claud
 
    ```
    JIRA_URL=https://your-domain.atlassian.net
-   JIRA_EMAIL=you@example.com
-   JIRA_API_TOKEN=your-api-token
+  JIRA_PAT_TOKEN=your-pat-token
    ```
 
 4. Run the server directly to sanity-check it starts:
@@ -70,15 +69,14 @@ cp .mcp.json.example .mcp.json
       "args": [],
       "env": {
         "JIRA_URL": "https://your-domain.atlassian.net",
-        "JIRA_EMAIL": "you@example.com",
-        "JIRA_API_TOKEN": "your-api-token"
+        "JIRA_PAT_TOKEN": "your-pat-token"
       }
     }
   }
 }
 ```
 
-`.mcp.json` is gitignored because it holds a real API token — only
+`.mcp.json` is gitignored because it holds a real PAT token — only
 `.mcp.json.example` (no secrets) is meant to be committed. Reload the Claude Code
 window after adding/editing it, then run `/mcp` in a chat to confirm the `jira`
 server connected.
@@ -88,8 +86,7 @@ Alternatively, register it via the CLI instead of hand-editing the file:
 ```bash
 claude mcp add jira \
   -e JIRA_URL=https://your-domain.atlassian.net \
-  -e JIRA_EMAIL=you@example.com \
-  -e JIRA_API_TOKEN=your-api-token \
+  -e JIRA_PAT_TOKEN=your-pat-token \
   -- /absolute/path/to/mcp-jira-server/.venv/bin/mcp-jira-server
 ```
 
@@ -99,8 +96,7 @@ Add the same `mcpServers` block shown above to `claude_desktop_config.json`.
 
 ## Notes
 
-- Authentication is Jira Cloud basic auth (email + API token). Server/Data Center
-  deployments (PAT/bearer auth) aren't supported by this build.
+- Authentication uses Jira PAT token auth.
 - `assignee` fields accept either an Atlassian account ID or an email address.
 - `additional_fields` on `create_issue` and the raw `fields` dict on `update_issue`
   let you pass any Jira field (including custom fields) that isn't otherwise exposed.

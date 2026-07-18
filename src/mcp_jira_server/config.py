@@ -14,20 +14,18 @@ class ConfigError(RuntimeError):
 @dataclass(frozen=True)
 class JiraConfig:
     url: str
-    api_token: str
-    email: str = ""
+    pat_token: str
 
     @classmethod
     def from_env(cls) -> "JiraConfig":
         url = os.environ.get("JIRA_URL", "").rstrip("/")
-        email = os.environ.get("JIRA_EMAIL", "")
-        api_token = os.environ.get("JIRA_API_TOKEN", "")
+        pat_token = os.environ.get("JIRA_PAT_TOKEN", "")
 
         missing = [
             name
             for name, value in (
                 ("JIRA_URL", url),
-                ("JIRA_API_TOKEN", api_token),
+                ("JIRA_PAT_TOKEN", pat_token),
             )
             if not value
         ]
@@ -37,4 +35,4 @@ class JiraConfig:
                 f"{', '.join(missing)}. Set them in your environment or a .env file."
             )
 
-        return cls(url=url, email=email, api_token=api_token)
+        return cls(url=url, pat_token=pat_token)
