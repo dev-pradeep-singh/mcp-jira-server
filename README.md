@@ -56,16 +56,16 @@ An [MCP](https://modelcontextprotocol.io) server that gives AI assistants (Claud
 
 ## Using with Claude Code
 
-Claude Code auto-detects a `.mcp.json` file at the project root. Copy the template
+Claude Code auto-detects a `mcp.json` file at the project root. Copy the template
 and fill in your own values:
 
 ```bash
-cp .mcp.json.example .mcp.json
+cp mcp.json.example mcp.json
 ```
 
 ```json
 {
-  "mcpServers": {
+  "servers": {
     "jira": {
       "command": "/absolute/path/to/mcp-jira-server/.venv/bin/mcp-jira-server",
       "args": [],
@@ -78,8 +78,8 @@ cp .mcp.json.example .mcp.json
 }
 ```
 
-`.mcp.json` is gitignored because it holds a real PAT token — only
-`.mcp.json.example` (no secrets) is meant to be committed. Reload the Claude Code
+`mcp.json` is gitignored because it holds a real PAT token — only
+`mcp.json.example` (no secrets) is meant to be committed. Reload the Claude Code
 window after adding/editing it, then run `/mcp` in a chat to confirm the `jira`
 server connected.
 
@@ -94,7 +94,7 @@ claude mcp add jira \
 
 ## Using with Claude Desktop
 
-Add the same `mcpServers` block shown above to `claude_desktop_config.json`.
+Add the same `servers` block shown above to `claude_desktop_config.json`.
 
 ## Notes
 
