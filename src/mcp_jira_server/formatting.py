@@ -42,3 +42,14 @@ def transition_to_dict(transition: dict) -> dict:
         "name": transition["name"],
         "to_status": transition.get("to", {}).get("name"),
     }
+
+
+def worklog_to_dict(worklog: Any) -> dict:
+    return {
+        "id": worklog.id,
+        "author": _user_name(getattr(worklog, "author", None)),
+        "comment": getattr(worklog, "comment", None),
+        "started": getattr(worklog, "started", None),
+        "time_spent": getattr(worklog, "timeSpent", None),
+        "time_spent_seconds": getattr(worklog, "timeSpentSeconds", None),
+    }

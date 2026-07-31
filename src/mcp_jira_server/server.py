@@ -4,7 +4,7 @@ from jira import JIRAError
 from mcp.server.fastmcp import FastMCP
 
 from .client import get_client
-from .formatting import comment_to_dict, issue_to_dict, transition_to_dict
+from .formatting import comment_to_dict, issue_to_dict, transition_to_dict, worklog_to_dict
 
 mcp = FastMCP(
     "jira",
@@ -149,6 +149,27 @@ def get_comments(issue_key: str) -> list[dict]:
     except JIRAError as e:
         raise _wrap_jira_error(f"get comments for {issue_key}", e) from e
     return [comment_to_dict(c) for c in comments]
+
+
+@mcp.tool()
+def get_worklogs(issue_key: str) -> dict:
+    """Get all worklogs (time logged) for a Jira issue, including a total time spent summary."""
+    client = get_client()
+    try:
+        worklogs = client.worklogs(issue_key)
+    except JIRAError as e:
+        raise _wrap_jira_error(f"get worklogs for {issue_key}", e) from e
+    entries = [worklog_to_dict(w) for w in worklogs]
+    total_seconds = sum(w["time_spent_seconds"] or 0 for w in entries)
+    hours, remainder = divmod(total_seconds, 3600)
+    minutes = remainder // 60
+    return {
+        "issue_key": issue_key,
+        "total_time_spent": f"{hours}h {minutes}m" if hours else f"{minutes}m",
+        "total_time_spent_seconds": total_seconds,
+        "worklog_count": len(entries),
+        "worklogs": entries,
+    }
 
 
 @mcp.tool()
